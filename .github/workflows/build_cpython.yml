@@ -9,6 +9,7 @@ jobs:
         python-remote: ['https://github.com/ader1990/cpython']
         python-branch: ['v3.8.6']
         python-arch: ['x64']
+        python-dir: ['amd64']
 
     steps:
       - name: Compile Python
@@ -21,16 +22,16 @@ jobs:
       - name: Create zip
         shell: cmd
         run: |
-          mkdir cpython\PCBuild\${{ matrix.python-arch }}\lib
-          mkdir cpython\PCBuild\${{ matrix.python-arch }}\include
-          mkdir cpython\PCBuild\${{ matrix.python-arch }}\libs
+          mkdir cpython\PCBuild\${{ matrix.python-dir }}\lib
+          mkdir cpython\PCBuild\${{ matrix.python-dir }}\include
+          mkdir cpython\PCBuild\${{ matrix.python-dir }}\libs
           
-          xcopy /i /e cpython\lib\*.* cpython\PCBuild\arm64\lib
-          xcopy /i /e cpython\include\*.* cpython\PCBuild\arm64\include
-          xcopy /i /e cpython\PC\pyconfig.h cpython\PCBuild\arm64\include
-          xcopy.exe /y "cpython\PCBuild\arm64\python*.lib" "cpython\PCBuild\arm64\libs\"
+          xcopy /i /e cpython\lib\*.* cpython\PCBuild\${{ matrix.python-dir }}\lib
+          xcopy /i /e cpython\include\*.* cpython\PCBuild\${{ matrix.python-dir }}\include
+          xcopy /i /e cpython\PC\pyconfig.h cpython\PCBuild\${{ matrix.python-dir }}\include
+          xcopy.exe /y "cpython\PCBuild\${{ matrix.python-dir }}\python*.lib" "cpython\PCBuild\${{ matrix.python-dir }}\libs\"
 
       - uses: actions/upload-artifact@v1
         with:
           name: cpython-${{ matrix.python-arch }}
-          path: cpython\PCBuild\${{ matrix.python-arch }}
+          path: cpython\PCBuild\${{ matrix.python-dir }}
