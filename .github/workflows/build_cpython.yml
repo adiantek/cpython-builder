@@ -7,9 +7,9 @@ jobs:
     strategy:
       matrix:
         python-remote: ['https://github.com/ader1990/cpython']
-        python-branch: ['v3.8.6']
-        python-arch: ['arm64']
-        python-dir: ['arm64']
+        python-branch: ['v3.9.0']
+        python-arch: ['x64']
+        python-dir: ['amd64']
 
     steps:
       - name: Compile Python
