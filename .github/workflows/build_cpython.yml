@@ -8,8 +8,8 @@ jobs:
       matrix:
         python-remote: ['https://github.com/ader1990/cpython']
         python-branch: ['v3.9.0']
-        python-arch: ['x64']
-        python-dir: ['amd64']
+        python-arch: ['arm64']
+        python-dir: ['arm64']
 
     steps:
       - name: Compile Python
@@ -33,5 +33,5 @@ jobs:
 
       - uses: actions/upload-artifact@v1
         with:
-          name: cpython-${{ matrix.python-arch }}
+          name: cpython-${{ matrix.python-branch }}-${{ matrix.python-arch }}
           path: cpython\PCBuild\${{ matrix.python-dir }}
