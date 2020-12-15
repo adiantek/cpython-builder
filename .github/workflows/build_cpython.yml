@@ -9,7 +9,7 @@ jobs:
         python-remote: ['https://github.com/ader1990/cpython']
         python-branch: ['v3.9.0']
         python-arch: ['x86']
-        python-dir: ['x86']
+        python-dir: ['win32']
 
     steps:
       - name: Compile Python
