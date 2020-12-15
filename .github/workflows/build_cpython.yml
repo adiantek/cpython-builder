@@ -8,8 +8,8 @@ jobs:
       matrix:
         python-remote: ['https://github.com/ader1990/cpython']
         python-branch: ['v3.9.0']
-        python-arch: ['arm64']
-        python-dir: ['arm64']
+        python-arch: ['x86']
+        python-dir: ['x86']
 
     steps:
       - name: Compile Python
