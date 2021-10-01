@@ -8,9 +8,7 @@ jobs:
       matrix:
         python-remote: ['https://github.com/ader1990/cpython']
         python-tag: ['v3.9.7', 'v3.10.0rc2']
-        python-arch: ['x86', 'arm64', 'x64']
-        python-dir: ['win32', 'arm64', 'amd64']
-        include:
+        config:
         - python-arch: x86
           python-dir: win32
         - python-arch: arm64
@@ -24,21 +22,21 @@ jobs:
           git clone ${{ matrix.python-remote }}
           cd cpython
           git checkout tags/${{ matrix.python-tag }}
-          PCbuild\build.bat -e -p ${{ matrix.python-arch }}
+          PCbuild\build.bat -e -p ${{ matrix.config.python-arch }}
 
       - name: Create zip
         shell: cmd
         run: |
-          mkdir cpython\PCBuild\${{ matrix.python-dir }}\lib
-          mkdir cpython\PCBuild\${{ matrix.python-dir }}\include
-          mkdir cpython\PCBuild\${{ matrix.python-dir }}\libs
+          mkdir cpython\PCBuild\${{ matrix.config.python-dir }}\lib
+          mkdir cpython\PCBuild\${{ matrix.config.python-dir }}\include
+          mkdir cpython\PCBuild\${{ matrix.config.python-dir }}\libs
           
-          xcopy /i /e cpython\lib\*.* cpython\PCBuild\${{ matrix.python-dir }}\lib
-          xcopy /i /e cpython\include\*.* cpython\PCBuild\${{ matrix.python-dir }}\include
-          xcopy /i /e cpython\PC\pyconfig.h cpython\PCBuild\${{ matrix.python-dir }}\include
-          xcopy.exe /y "cpython\PCBuild\${{ matrix.python-dir }}\python*.lib" "cpython\PCBuild\${{ matrix.python-dir }}\libs\"
+          xcopy /i /e cpython\lib\*.* cpython\PCBuild\${{ matrix.config.python-dir }}\lib
+          xcopy /i /e cpython\include\*.* cpython\PCBuild\${{ matrix.config.python-dir }}\include
+          xcopy /i /e cpython\PC\pyconfig.h cpython\PCBuild\${{ matrix.config.python-dir }}\include
+          xcopy.exe /y "cpython\PCBuild\${{ matrix.config.python-dir }}\python*.lib" "cpython\PCBuild\${{ matrix.config.python-dir }}\libs\"
 
       - uses: actions/upload-artifact@v1
         with:
-          name: cpython-${{ matrix.python-tag }}-${{ matrix.python-arch }}
-          path: cpython\PCBuild\${{ matrix.python-dir }}
+          name: cpython-${{ matrix.python-tag }}-${{ matrix.config.python-arch }}
+          path: cpython\PCBuild\${{ matrix.config.python-dir }}
