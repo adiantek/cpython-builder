@@ -7,7 +7,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        python-remote: ['https://github.com/ader1990/cpython']
+        python-remote: ['https://github.com/python/cpython']
         python-tag: ['v3.9.7', 'v3.10.0rc2']
         config:
         - python-arch: x86
