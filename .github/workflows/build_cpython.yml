@@ -8,6 +8,8 @@ jobs:
       matrix:
         python-remote: ['https://github.com/ader1990/cpython']
         python-tag: ['v3.9.7', 'v3.10.0rc2']
+        python-arch: ['x86', 'arm64', 'x64']
+        python-dir: ['win32', 'arm64', 'amd64']
         include:
         - python-arch: x86
           python-dir: win32
