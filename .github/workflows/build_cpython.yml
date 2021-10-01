@@ -3,6 +3,7 @@ on: [push, pull_request]
 
 jobs:
   build:
+    name: ${{ matrix.python-tag }}-${{ matrix.config.python-arch }}
     runs-on: windows-latest
     strategy:
       matrix:
